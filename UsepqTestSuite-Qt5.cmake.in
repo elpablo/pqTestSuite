@@ -3,18 +3,8 @@ set(PQTESTSUITE_INCLUDE_DIR ${PQTESTSUITE_INSTALL_DIR}/include)
 set(PQTESTSUITE_LIBRARY_DIR ${PQTESTSUITE_INSTALL_DIR}/lib)
 set(PQTESTSUITE_LIBRARY ${PQTESTSUITE_INSTALL_DIR}/lib/libpqTestSuite.so)
 
-# Add include directories needed to use pqTestSuite.
-include_directories(BEFORE
-#  ${Qt5Test_INCLUDE_DIRS}
-  ${PQTESTSUITE_INCLUDE_DIR}/
-)
-add_definitions(${Qt5Test_DEFINITIONS})
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Test_EXECUTABLE_COMPILE_FLAGS}")
-
-# Add link directories needed to use pqTestSuite.
-link_directories(
-  ${PQTESTSUITE_LIBRARY_DIR}/
-)
+#add_definitions(${Qt5Test_DEFINITIONS})
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${Qt5Test_EXECUTABLE_COMPILE_FLAGS}")
 
 include(${PQTESTSUITE_INSTALL_DIR}/include/CMake/pqInitTestSuiteProject.cmake)
 include(${PQTESTSUITE_INSTALL_DIR}/include/CMake/pqCreateTestSuite.cmake)

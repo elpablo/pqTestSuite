@@ -3,18 +3,5 @@ set(PQTESTSUITE_INCLUDE_DIR ${PQTESTSUITE_INSTALL_DIR}/include)
 set(PQTESTSUITE_LIBRARY_DIR ${PQTESTSUITE_INSTALL_DIR}/lib)
 set(PQTESTSUITE_LIBRARY ${PQTESTSUITE_INSTALL_DIR}/lib/libpqTestSuite.so)
 
-
-# Add include directories needed to use pqTestSuite.
-#include (${QT_USE_FILE})
-include_directories(BEFORE
-#  ${QT_INCLUDES}
-  ${PQTESTSUITE_INCLUDE_DIR}/
-)
-
-# Add link directories needed to use pqTestSuite.
-link_directories(
-  ${PQTESTSUITE_LIBRARY_DIR}/
-)
-
 include(${PQTESTSUITE_INSTALL_DIR}/include/CMake/pqInitTestSuiteProject.cmake)
 include(${PQTESTSUITE_INSTALL_DIR}/include/CMake/pqCreateTestSuite.cmake)
