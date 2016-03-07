@@ -5,7 +5,7 @@ set(PQTESTSUITE_LIBRARY ${PQTESTSUITE_INSTALL_DIR}/lib/libpqTestSuite.so)
 
 # Add include directories needed to use pqTestSuite.
 include_directories(BEFORE
-  ${Qt5Test_INCLUDE_DIRS}
+#  ${Qt5Test_INCLUDE_DIRS}
   ${PQTESTSUITE_INCLUDE_DIR}/
 )
 add_definitions(${Qt5Test_DEFINITIONS})
