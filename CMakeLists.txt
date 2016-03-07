@@ -14,7 +14,7 @@
 # limitations under the License.
 # ***************************************************************************/
 
-cmake_minimum_required(VERSION 2.8.11)
+cmake_minimum_required(VERSION 2.8.12)
 
 project(pqTestSuite)
 
@@ -82,4 +82,3 @@ install(FILES ${CMAKE_CURRENT_BINARY_DIR}/pqTestConfig.h DESTINATION ${CMAKE_INS
 install(FILES pqTestSuite.h pqTestRegistry.h pqTestRegistration.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/UsepqTestSuite.cmake DESTINATION ${CMAKE_INSTALL_PREFIX}/)
 install(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/CMake DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
-
