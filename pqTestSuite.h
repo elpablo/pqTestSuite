@@ -46,9 +46,9 @@ int main(int argc, char *argv[]) \
 
 // Define check macros
 #define pqVERIFY QVERIFY2
-#define pqVERIFY_FALSE(false_stm, comment) QVERIFY2(!false_stm, comment)
-#define pqVERIFY_NULL(null_ptr, comment) QVERIFY2(null_ptr == NULL, comment)
-#define pqVERIFY_NOT_NULL(null_ptr, comment) QVERIFY2(null_ptr != NULL, comment)
+#define pqVERIFY_FALSE(false_stm, comment) QVERIFY2(!(false_stm), comment)
+#define pqVERIFY_NULL(null_ptr, comment) QVERIFY2((null_ptr) == NULL, comment)
+#define pqVERIFY_NOT_NULL(null_ptr, comment) QVERIFY2((null_ptr) != NULL, comment)
 #define pqVERIFY_GREATER_THEN(value, ref_val, comment) QVERIFY2((value) > (ref_val), comment)
 #define pqVERIFY_GREATER_THEN_OR_EQUAL(value, ref_val, comment) QVERIFY2((value) >= (ref_val), comment)
 #define pqVERIFY_LOWER_THEN(value, ref_val, comment) QVERIFY2((value) < (ref_val), comment)
