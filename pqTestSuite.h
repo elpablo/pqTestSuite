@@ -29,6 +29,10 @@
 #include "pqTestRegistration.h"
 #include "pqTestConfig.h"
 
+#include "fakeit.hpp"
+using namespace fakeit;
+
+
 #define PQ_TESTSUITE_MAIN() \
 int main(int argc, char *argv[]) \
 { \

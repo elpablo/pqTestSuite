@@ -52,6 +52,10 @@ else()
 endif()
 mark_as_advanced(QT_QMAKE_EXECUTABLE)
 
+## C++11 is required by FakeIt mock framework
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(FAKEIT_DIR "" CACHE PATH "Path to the FakeIt source directory")
+
 SET (TEST_SUITE_SOURCE_FILES
     pqTestRegistration.h
     pqTestRegistry.cxx
@@ -65,7 +69,12 @@ target_link_libraries(${PROJECT_NAME} ${QT_LIBRARIES} ${QT_QTTEST_LIBRARY})
 
 # Configure the Config file containing pqTestSuite and Test Data useful variables.
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/pqTestConfig.h.in ${CMAKE_CURRENT_BINARY_DIR}/pqTestConfig.h)
-include_directories(${CMAKE_CURRENT_BINARY_DIR} ${PROJECT_SOURCE_DIR})
+include_directories(
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${PROJECT_SOURCE_DIR}
+    ${FAKEIT_DIR}/single_header/qtest
+    ${FAKEIT_DIR}/config/qtest
+    )
 
 # Configure the Use file
 set(PQTESTSUITE_INSTALL_DIR ${CMAKE_INSTALL_PREFIX})
