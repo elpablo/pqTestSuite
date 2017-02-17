@@ -52,7 +52,7 @@ else()
 endif()
 mark_as_advanced(QT_QMAKE_EXECUTABLE)
 
-## C++11 is required by FakeIt mock framework
+## C++11 is required by FakeIt mock framework (https://github.com/eranpeer/FakeIt)
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(FAKEIT_DIR "" CACHE PATH "Path to the FakeIt source directory")
 
