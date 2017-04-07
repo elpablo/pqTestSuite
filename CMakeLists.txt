@@ -18,13 +18,18 @@ cmake_minimum_required(VERSION 3.0)
 
 project("pqTestSuite" VERSION "1.0.0")
 
+#[====================================================================[
+In ${PROJECT_SOURCE_DIR}/cmake/include add a cmake script to setup the
+project specific include search path
+#]====================================================================]
+include("${PROJECT_SOURCE_DIR}/cmake/include/${PROJECT_NAME}_setup_cmake_include.cmake")
 
 set(BUILD_SHARED_LIBS TRUE CACHE BOOL "build shared libraries")
 set(FAKEIT_DIR "" CACHE PATH "Path to the FakeIt source directory")
 
 # This will try to find Qt5, if not found then will fall back to Qt4
 # It will define QT_VERSION and QT_FOUND variables useful for tests
-include("${CMAKE_CURRENT_SOURCE_DIR}/CMake/setup_qt.cmake")
+include("${PROJECT_NAME}_setup_qt")
 
 if (NOT QT_FOUND)
   message(FATAL_ERROR
@@ -44,23 +49,40 @@ set_property(TARGET pqTestSuite PROPERTY PUBLIC_HEADER
 )
 
 if(UNIX)
-    target_compile_options(pqTestSuite PRIVATE "-std=c++11")
+    target_compile_options(pqTestSuite PRIVATE
+        "-std=c++11"
+    )
 endif()
 
-target_compile_definitions(pqTestSuite PRIVATE Wall)
-
-target_link_libraries(pqTestSuite
-    PRIVATE
-        ${QT_LIBS}
+target_compile_definitions(pqTestSuite PRIVATE
+    Wall
 )
 
+target_include_directories(pqTestSuite
+    INTERFACE
+        # for the dependers within the build
+        #$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
+        # for the external CMake dependers that use find_package to
+        # import the target
+        $<INSTALL_INTERFACE:include>
+)
+
+target_link_libraries(pqTestSuite PUBLIC
+    ${QT_LIBS}
+)
+
+########
+## install/deploy phase of the library
 install(
-    TARGETS pqTestSuite
+    TARGETS pqTestSuite EXPORT ${PROJECT_NAME}-targets
     DESTINATION "lib"
     PUBLIC_HEADER DESTINATION "include"
 )
 
-install(
-    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/CMake"
-    DESTINATION "${CMAKE_INSTALL_PREFIX}/include"
-)
+#install(
+#    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
+#    DESTINATION "${CMAKE_INSTALL_PREFIX}/include"
+#)
+
+# Generate and install the package configuration files ----------------
+include("${PROJECT_NAME}_setup_package")
