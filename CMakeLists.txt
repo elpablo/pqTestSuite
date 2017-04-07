@@ -44,7 +44,6 @@ add_library(pqTestSuite
 set_property(TARGET pqTestSuite PROPERTY POSITION_INDEPENDENT_CODE TRUE)
 set_property(TARGET pqTestSuite PROPERTY AUTOMOC TRUE)
 set_property(TARGET pqTestSuite PROPERTY PUBLIC_HEADER
-    "pqTestRegistration.h"
     "pqTestSuite.h"
 )
 
