@@ -79,10 +79,12 @@ install(
     PUBLIC_HEADER DESTINATION "include"
 )
 
-#install(
-#    DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
-#    DESTINATION "${CMAKE_INSTALL_PREFIX}/include"
-#)
+install(
+    FILES
+    "${PROJECT_SOURCE_DIR}/cmake/include/pqCreateTestSuite.cmake"
+    "${PROJECT_SOURCE_DIR}/cmake/include/pqInitTestSuiteProject.cmake"
+    DESTINATION "share/cmake/include"
+)
 
 # Generate and install the package configuration files ----------------
 include("${PROJECT_NAME}_setup_package")
