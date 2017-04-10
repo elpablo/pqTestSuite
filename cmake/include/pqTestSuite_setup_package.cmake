@@ -20,5 +20,5 @@ install(
     FILES
     "${PROJECT_BINARY_DIR}/cmake/pkg/${PROJECT_NAME}Config.cmake"
     "${PROJECT_BINARY_DIR}/cmake/pkg/${PROJECT_NAME}Config-version.cmake"
-    DESTINATION "share/cmake/pkg"
+    DESTINATION "share/cmake/${PROJECT_NAME}"
 )
