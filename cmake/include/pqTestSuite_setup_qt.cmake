@@ -26,3 +26,9 @@ if(NOT Qt5Test_FOUND)
     endif()
 
 endif()
+
+if (NOT QT_FOUND)
+  message(FATAL_ERROR
+      "Qt libraries are required."
+  "Please install Qt4 or Qt5 and run again the CMake on the project.")
+endif ()
