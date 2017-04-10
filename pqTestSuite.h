@@ -31,8 +31,8 @@
 
 #include <QFile>
 
-#include "fakeit.hpp"
-using namespace fakeit;
+//#include "fakeit.hpp"
+//using namespace fakeit;
 
 
 #define PQ_TESTSUITE_MAIN() \
