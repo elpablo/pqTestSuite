@@ -19,23 +19,17 @@ cmake_minimum_required(VERSION 3.0)
 project("pqTestSuite" VERSION "1.0.0")
 
 #[====================================================================[
-In ${PROJECT_SOURCE_DIR}/cmake/include add a cmake script to setup the
-project specific include search path
+#In ${PROJECT_SOURCE_DIR}/cmake/include add a cmake script to setup the
+#project specific include search path
 #]====================================================================]
 include("${PROJECT_SOURCE_DIR}/cmake/include/${PROJECT_NAME}_setup_cmake_include.cmake")
 
 set(BUILD_SHARED_LIBS TRUE CACHE BOOL "build shared libraries")
-set(FAKEIT_DIR "" CACHE PATH "Path to the FakeIt source directory")
+#set(FAKEIT_DIR "" CACHE PATH "Path to the FakeIt source directory")
 
 # This will try to find Qt5, if not found then will fall back to Qt4
 # It will define QT_VERSION and QT_FOUND variables useful for tests
 include("${PROJECT_NAME}_setup_qt")
-
-if (NOT QT_FOUND)
-  message(FATAL_ERROR
-      "pqTestSuite require QtTest to be enabled."
-      "Please install Qt4 or Qt5 and run again the CMake on this project.")
-endif ()
 
 add_library(pqTestSuite
     "pqTestRegistry.cxx"
@@ -44,6 +38,8 @@ add_library(pqTestSuite
 set_property(TARGET pqTestSuite PROPERTY POSITION_INDEPENDENT_CODE TRUE)
 set_property(TARGET pqTestSuite PROPERTY AUTOMOC TRUE)
 set_property(TARGET pqTestSuite PROPERTY PUBLIC_HEADER
+    "pqTestRegistration.h"
+    "pqTestRegistry.h"
     "pqTestSuite.h"
 )
 
@@ -70,6 +66,12 @@ target_link_libraries(pqTestSuite PUBLIC
     ${QT_LIBS}
 )
 
+configure_file(
+    "${PROJECT_SOURCE_DIR}/pqTestConfig.h.in"
+    "${PROJECT_BINARY_DIR}/pqTestConfig.h"
+    @ONLY
+)
+
 ########
 ## install/deploy phase of the library
 install(
@@ -80,8 +82,13 @@ install(
 
 install(
     FILES
-    "${PROJECT_SOURCE_DIR}/cmake/include/pqCreateTestSuite.cmake"
-    "${PROJECT_SOURCE_DIR}/cmake/include/pqInitTestSuiteProject.cmake"
+    "${PROJECT_BINARY_DIR}/pqTestConfig.h"
+    DESTINATION "include"
+)
+
+install(
+    FILES
+    "${PROJECT_SOURCE_DIR}/cmake/include/${PROJECT_NAME}_setup_suite.cmake"
     DESTINATION "share/cmake/include"
 )
 
