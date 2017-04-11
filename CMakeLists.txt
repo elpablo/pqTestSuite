@@ -25,6 +25,7 @@ project("pqTestSuite" VERSION "1.0.0")
 include("${PROJECT_SOURCE_DIR}/cmake/include/${PROJECT_NAME}_setup_cmake_include.cmake")
 
 set(BUILD_SHARED_LIBS TRUE CACHE BOOL "build shared libraries")
+set(TEST_DATA_DIR "" CACHE PATH "Path to the dir containing the data used for the test suites")
 #set(FAKEIT_DIR "" CACHE PATH "Path to the FakeIt source directory")
 
 # This will try to find Qt5, if not found then will fall back to Qt4
